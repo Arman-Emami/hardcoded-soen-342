@@ -9,7 +9,7 @@ public class Expert {
     //private List<Availability> availabilityList = new ArrayList<>();
 
     // Possibly link back to the Institution if needed
-    private Institution institution;
+    //private Institution institution;
 
     // Constructors
     public Expert() {}
