@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Expert {
+    private int licenseNumber;
+    private String expertiseArea;
+
+    // Each Expert can have multiple Availability entries
+    //private List<Availability> availabilityList = new ArrayList<>();
+
+    // Possibly link back to the Institution if needed
+    private Institution institution;
+
+    // Constructors
+    public Expert() {}
+
+    public Expert(int licenseNumber, String expertiseArea) {
+        this.licenseNumber = licenseNumber;
+        this.expertiseArea = expertiseArea;
+    }
+
+    // Getters and Setters
+    public int getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public void setLicenseNumber(int licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    public String getExpertiseArea() {
+        return expertiseArea;
+    }
+
+    public void setExpertiseArea(String expertiseArea) {
+        this.expertiseArea = expertiseArea;
+    }
+
+    public List<Availability> getAvailabilityList() {
+        return availabilityList;
+    }
+
+    public Institution getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
+    }
+
+    // UML methods
+    public void login() {
+        // TODO implement
+    }
+
+    public void addAvailability(String weekDayAvailable, String startTime, String endTime) {
+        Availability newAvail = new Availability(weekDayAvailable, startTime, endTime);
+        availabilityList.add(newAvail);
+    }
+
+    public void addExpertise(String newArea) {
+        // Possibly just set expertiseArea, or store multiple expertise areas
+        this.expertiseArea = newArea;
+    }
+
+    public void getAuction() {
+        // TODO implement retrieving auctions the expert is involved in
+    }
+
+    public void offerAvailability() {
+        // TODO implement
+    }
+
+    public void modifyAvailability() {
+        // TODO implement
+    }
+}
+
