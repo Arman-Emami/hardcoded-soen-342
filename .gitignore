@@ -1,0 +1,12 @@
+# Default ignored files
+/shelf/
+/.idea/workspace.xml
+# ----------------------------
+# Ignore Misc Files
+# ----------------------------
+*.iml
+*.ipr
+*.iws
+
+# Ignore entire .idea folder
+.idea/
