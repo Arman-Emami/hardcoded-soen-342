@@ -3,9 +3,11 @@ public class Admin extends User{
 
     // Constructors
     public Admin() {}
-
     public Admin(int id) {
         this.id = id;
+    }
+    public Admin(String emailAddress, String password) {
+        super(emailAddress, password);
     }
 
     // Getters and Setters

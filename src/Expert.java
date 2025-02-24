@@ -1,18 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expert {
+public class Expert extends User {
     private int licenseNumber;
     private String expertiseArea;
 
     // Each Expert can have multiple Availability entries
-    //private List<Availability> availabilityList = new ArrayList<>();
+    private List<Availability> availabilityList = new ArrayList<>();
 
     // Possibly link back to the Institution if needed
-    //private Institution institution;
+    private Institution institution;
 
     // Constructors
     public Expert() {}
+    public Expert(String emailAddress, String password) {
+        super(emailAddress, password);
+    }
 
     public Expert(int licenseNumber, String expertiseArea) {
         this.licenseNumber = licenseNumber;

@@ -13,6 +13,9 @@ public class Clients extends User {
     public Clients() {
         super();
     }
+    public Clients(String emailAddress, String password) {
+        super(emailAddress, password);
+    }
 
     public Clients(String emailAddress, String phoneNumber, String name, String password,
                    String affiliation, String intent) {

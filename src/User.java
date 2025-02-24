@@ -1,4 +1,6 @@
-public class User {
+import java.util.Objects;
+
+abstract class User {
     private String emailAddress;
     private String phoneNumber;
     private String name;
@@ -12,6 +14,17 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.password = password;
+    }
+    public User(String emailAddress, String password) {
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
+
+    public boolean checkUsername(String s) {
+        return (Objects.equals(s, this.getEmailAddress()));
+    }
+    public boolean checkPassword(String s) {
+        return (Objects.equals(s, this.getPassword()));
     }
 
     // Getters and Setters
