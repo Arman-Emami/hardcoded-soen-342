@@ -2,8 +2,8 @@
 # SOEN 342 
 
 ### Contributors:
-- **[Student 1 Name]**  
-  Student ID: [Student 1 ID]
+- **[Seyed Arman Emami]**  
+  Student ID: [40264774]
 
-- **[Student 2 Name]**  
-  Student ID: [Student 2 ID]
+- **[Parsa Darbani]**  
+  Student ID: [40265199]
