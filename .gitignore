@@ -9,4 +9,10 @@
 *.iws
 
 # Ignore entire .idea folder
-.idea/
+.idea/*
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/libraries/
+
+/out/
