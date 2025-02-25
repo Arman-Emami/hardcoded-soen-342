@@ -1,9 +1,11 @@
+import java.util.*;
 public class ObjectOfInterest {
     private String title;
     private String detailDescription;
     private boolean isOwnedByInstitution;
     private boolean canBeAuctioned;
     private String objectType;
+    private static List<ObjectOfInterest> listOfObjects = new ArrayList<>();
 
     // Constructors
     public ObjectOfInterest() {}
@@ -15,6 +17,8 @@ public class ObjectOfInterest {
         this.isOwnedByInstitution = isOwnedByInstitution;
         this.canBeAuctioned = canBeAuctioned;
         this.objectType = objectType;
+        listOfObjects.add(this);
+
     }
 
     // Getters and Setters
@@ -58,8 +62,16 @@ public class ObjectOfInterest {
         this.objectType = objectType;
     }
 
+    public static List<ObjectOfInterest> getListOfObjects() {
+        return listOfObjects;
+    }
+
     // UML method
     public void displayInfo() {
-        // TODO implement
+        System.out.println("Title: " + title);
+        System.out.println("Description: " + detailDescription);
+        System.out.println("Owned by Institution: " + isOwnedByInstitution);
+        System.out.println("Can be Auctioned: " + canBeAuctioned);
+        System.out.println("Object Type: " + objectType);
     }
 }
