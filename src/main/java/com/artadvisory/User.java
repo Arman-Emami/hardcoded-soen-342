@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 import java.util.Objects;
 
 abstract class User {

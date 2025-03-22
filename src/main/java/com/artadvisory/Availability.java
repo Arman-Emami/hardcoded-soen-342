@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 public class Availability {
     private String weekDayAvailable;
     private String startTime;  // or use LocalTime

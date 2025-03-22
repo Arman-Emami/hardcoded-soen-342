@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 import java.util.Scanner;
 
 public class Main {

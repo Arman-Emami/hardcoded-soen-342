@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package com.artadvisory;
 
 public class Clients extends User {
     private String affiliation;

@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 import java.util.*;
 public class ObjectOfInterest {
     private String title;

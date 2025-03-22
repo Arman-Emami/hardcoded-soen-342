@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 public class Viewing {
     private String name;
     private String city;

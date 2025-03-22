@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 public class Admin extends User{
     private int id;
 

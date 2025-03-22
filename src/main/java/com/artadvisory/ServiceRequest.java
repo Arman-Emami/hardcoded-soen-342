@@ -1,3 +1,5 @@
+package com.artadvisory;
+
 import java.util.Date;
 
 public class ServiceRequest {
