@@ -1,24 +1,24 @@
-package com.artadvisory;
+package com.artadvisory.model;
 
 public class Admin extends User{
-    private int id;
+    private int adminID;
 
     // Constructors
     public Admin() {}
     public Admin(int id) {
-        this.id = id;
+        this.adminID = id;
     }
     public Admin(String emailAddress, String password) {
         super(emailAddress, password);
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
+    public int getAdminID() {
+        return adminID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
     }
 
     // Methods per UML

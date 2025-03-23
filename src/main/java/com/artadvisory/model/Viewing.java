@@ -1,4 +1,4 @@
-package com.artadvisory;
+package com.artadvisory.model;
 
 public class Viewing {
     private String name;

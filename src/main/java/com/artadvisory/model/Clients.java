@@ -1,4 +1,4 @@
-package com.artadvisory;
+package com.artadvisory.model;
 
 public class Clients extends User {
     private String affiliation;

@@ -1,4 +1,4 @@
-package com.artadvisory;
+package com.artadvisory.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 public class Expert extends User {
     private int licenseNumber;
     private String expertiseArea;
-
     // Each Expert can have multiple Availability entries
     private List<Availability> availabilityList = new ArrayList<>();
 

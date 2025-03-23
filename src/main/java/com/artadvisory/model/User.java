@@ -1,4 +1,4 @@
-package com.artadvisory;
+package com.artadvisory.model;
 
 import java.util.Objects;
 
