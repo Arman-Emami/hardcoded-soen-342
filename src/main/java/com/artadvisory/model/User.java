@@ -3,10 +3,10 @@ package com.artadvisory.model;
 import java.util.Objects;
 
 abstract class User {
-    private String emailAddress;
-    private String phoneNumber;
-    private String name;
-    private String password;
+    protected String emailAddress;
+    protected String phoneNumber;
+    protected String name;
+    protected String password;
 
     // Constructors
     public User() {}

@@ -11,6 +11,13 @@ public class Admin extends User{
     public Admin(String emailAddress, String password) {
         super(emailAddress, password);
     }
+    public Admin(int adminID, String emailAddress, String phoneNumber, String name, String password) {
+        this.adminID = adminID;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+    }
 
     // Getters and Setters
     public int getAdminID() {

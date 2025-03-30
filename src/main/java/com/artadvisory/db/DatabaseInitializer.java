@@ -32,7 +32,7 @@ public class DatabaseInitializer {
             password TEXT NOT NULL,
             affiliation TEXT,
             intent TEXT,
-            accountStatus TEXT
+            accountStatus TEXT DEFAULT "Pending"
         );
     """;
         executeTableCreation(sql, "Client");
@@ -100,9 +100,16 @@ public class DatabaseInitializer {
             auctionID INTEGER PRIMARY KEY AUTOINCREMENT,
             auctionHouseID INTEGER NOT NULL,
             name TEXT NOT NULL,
-            date TEXT NOT NULL,
-            startTime TEXT NOT NULL,
-            endTime TEXT NOT NULL,
+            auctionSpecialty TEXT,
+            startWeekDay TEXT,
+            endWeekDay TEXT,
+            startDate TEXT,
+            endDate TEXT,
+            startTime TEXT,
+            endTime TEXT,
+            auctionType TEXT,
+            timeZone TEXT,
+            isOnline INTEGER NOT NULL CHECK (isOnline IN (0,1)),
             FOREIGN KEY (auctionHouseID) REFERENCES AuctionHouse(auctionHouseID)
         );
     """;

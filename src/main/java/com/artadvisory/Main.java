@@ -1,30 +1,28 @@
 package com.artadvisory;
 
 import com.artadvisory.db.DatabaseInitializer;
-import com.artadvisory.model.Admin;
-import com.artadvisory.model.Clients;
-import com.artadvisory.model.Expert;
-import com.artadvisory.model.ObjectOfInterest;
+import com.artadvisory.dao.*;
+import com.artadvisory.model.*;
 
-import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
         DatabaseInitializer.createClientTable();
 
+        ClientDAO clientDAO = new ClientDAO();
+
+        Client c = new Client("example09@mail.com", "123-456-7890", "John Doe", "pass123",
+                "Private Collector", "Interested in Islamic Art");
+        clientDAO.insertClient(c);
+
+        List<Client> clients = clientDAO.getAllClients();
+        for (Client client : clients) {
+            System.out.println(client);
+        }
+
 //        Scanner keyIn = new Scanner(System.in);
-//
-//        new ObjectOfInterest("Painting 1", "Beautiful landscape painting", true, true, "Art");
-//        new ObjectOfInterest("Sculpture 1", "Ancient Greek sculpture", false, true, "Sculpture");
-//        new ObjectOfInterest("Vase 1", "Porcelain vase from Ming dynasty", true, true, "Antique");
-//        new ObjectOfInterest("Jewelry 1", "Golden necklace with emeralds", false, true, "Jewelry");
-//        new ObjectOfInterest("Watch 1", "Vintage Rolex watch", true, false, "Collectible");
-//        new ObjectOfInterest("Book 1", "First edition of classic novel", false, true, "Book");
-//        new ObjectOfInterest("Coin 1", "Roman coin from 1st century", true, true, "Coin");
-//        new ObjectOfInterest("Car 1", "Classic 1965 Mustang", false, false, "Vehicle");
-//        new ObjectOfInterest("Statue 1", "Bronze statue of historical figure", true, true, "Statue");
-//        new ObjectOfInterest("Instrument 1", "Stradivarius violin", false, true, "Instrument");
 //
 //        Admin admin = new Admin("admin@gmail.com", "admin");
 //        Expert expert = new Expert("expert@gmail.com", "expert");
