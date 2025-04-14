@@ -2,6 +2,7 @@ package com.artadvisory.model;
 
 import java.util.*;
 public class ObjectOfInterest {
+    private int auctionID;
     private String title;
     private String detailDescription;
     private boolean isOwnedByInstitution;
@@ -21,6 +22,9 @@ public class ObjectOfInterest {
         this.objectType = objectType;
         listOfObjects.add(this);
 
+    }
+
+    public ObjectOfInterest(int objectOfInterestID, int auctionID, String title, String detailDescription, boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType) {
     }
 
     // Getters and Setters
@@ -75,5 +79,13 @@ public class ObjectOfInterest {
         System.out.println("Owned by Institution: " + isOwnedByInstitution);
         System.out.println("Can be Auctioned: " + canBeAuctioned);
         System.out.println("Object Type: " + objectType);
+    }
+
+    public int getAuctionID() {
+        return this.auctionID;
+    }
+
+    public boolean canBeAuctioned() {
+        return this.canBeAuctioned;
     }
 }

@@ -24,7 +24,7 @@ public class Expert extends User {
     }
 
     // Getters and Setters
-    public int getLicenseNumber() {
+    public String getLicenseNumber() {
         return licenseNumber;
     }
 

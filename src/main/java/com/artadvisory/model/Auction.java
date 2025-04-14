@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Auction {
     private String name;
-    private String expertise;
-    private Date startDateTime;
-    private Date endDateTime;
+    private String auctionSpeciality;
+    private String weekday;
+    public String date;
     private String startTime; // or use a more precise type
     private String endTime;   // or use a more precise type
     private String auctionType;
+    private String timezone;
     private boolean isOnline;
 
     // An Auction can contain many ObjectsOfInterest
@@ -20,15 +21,16 @@ public class Auction {
     // Constructors
     public Auction() {}
 
-    public Auction(String name, String expertise, Date startDateTime, Date endDateTime,
-                   String startTime, String endTime, String auctionType, boolean isOnline) {
+    public Auction(String name, String auctionSpeciality, String weekday, String date,
+                   String startTime, String endTime, String auctionType, String timezone, boolean isOnline) {
         this.name = name;
-        this.expertise = expertise;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.auctionSpeciality = auctionSpeciality;
+        this.weekday = weekday;
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.auctionType = auctionType;
+        this.timezone = timezone;
         this.isOnline = isOnline;
     }
 
@@ -41,28 +43,21 @@ public class Auction {
         this.name = name;
     }
 
-    public String getExpertise() {
-        return expertise;
+    public String getauctionSpeciality() {
+        return auctionSpeciality;
     }
 
-    public void setExpertise(String expertise) {
-        this.expertise = expertise;
+    public void setauctionSpeciality(String auctionSpeciality) {
+        this.auctionSpeciality = auctionSpeciality;
     }
 
-    public Date getStartDateTime() {
-        return startDateTime;
+
+    public String getWeekday() {
+        return weekday;
     }
 
-    public void setStartDateTime(Date startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public Date getEndDateTime() {
-        return endDateTime;
-    }
-
-    public void setEndDateTime(Date endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
     }
 
     public String getStartTime() {

@@ -1,6 +1,9 @@
 package com.artadvisory.model;
 
-public class Admin extends User{
+import com.artadvisory.interfaces.AdminActions;
+import com.artadvisory.dao.*;
+
+public class Admin extends User implements AdminActions {
     private int adminID;
 
     // Constructors
@@ -19,6 +22,9 @@ public class Admin extends User{
         this.password = password;
     }
 
+    public Admin(int adminID, String emailAddress, String phoneNumber, String name, String password, Object o) {
+    }
+
     // Getters and Setters
     public int getAdminID() {
         return adminID;
@@ -28,37 +34,67 @@ public class Admin extends User{
         this.adminID = adminID;
     }
 
-    // Methods per UML
-    public void updateClientInfo() {
-        // TODO implement
+
+    @Override
+    public void updateClientInfo(String email, String name, String phone) {
+        ClientDAO dao = new ClientDAO();
+        dao.updateClientInfo(email, name, phone);
     }
 
-    public void addObjectOfInterest() {
-        // TODO implement
+    @Override
+    public void approveClient(int clientID) {
+        ClientDAO dao = new ClientDAO();
+        dao.updateAccountStatus(clientID, "Approved");
     }
 
-    public void updateObjectOfInterest() {
-        // TODO implement
+    @Override
+    public void rejectClient(int clientID) {
+        ClientDAO dao = new ClientDAO();
+        dao.updateAccountStatus(clientID, "Rejected");
     }
 
-    public void addExpertAccount(String name, int licenseNumber, String contactInfo, String expertiseArea) {
-        // TODO implement
+    @Override
+    public void addObjectOfInterest(int auctionID, String title, String description,
+                                    boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType) {
+        ObjectOfInterest obj = new ObjectOfInterest(auctionID, title, description, isOwnedByInstitution, canBeAuctioned, objectType);
+        ObjectOfInterestDAO dao = new ObjectOfInterestDAO();
+        dao.insertObject(obj);
     }
 
-    public void deleteUser() {
-        // TODO implement
+    @Override
+    public void updateObjectOfInterest(int objectID, String title, String description,
+                                       boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType) {
+        ObjectOfInterestDAO dao = new ObjectOfInterestDAO();
+        dao.updateObject(objectID, title, description, isOwnedByInstitution, canBeAuctioned, objectType);
     }
 
-    public void approveClient() {
-        // TODO implement
+    @Override
+    public void addExpertAccount(String email, String password, String name, String licenseNumber, String contactInfo, String expertiseArea) {
+        Expert expert = new Expert(email, contactInfo, name, password, licenseNumber, expertiseArea);
+        ExpertDAO dao = new ExpertDAO();
+        dao.insertExpert(expert);
     }
 
-    public void updateUser() {
-        // TODO implement
+    @Override
+    public void addExpertAvailability(int expertID, String weekDay, String startTime, String endTime, String availabilityType) {
+        AvailabilityDAO dao = new AvailabilityDAO();
+        dao.insertAvailability(expertID, weekDay, startTime, endTime, availabilityType);
     }
 
-    public void addExpertAvailability() {
-        // TODO implement
+    @Override
+    public void deleteUser(String userType, String email) {
+        switch (userType.toLowerCase()) {
+            case "client" -> new ClientDAO().deleteClientByEmail(email);
+            case "expert" -> new ExpertDAO().deleteExpertByEmail(email);
+            case "admin" -> new AdminDAO().deleteAdminByEmail(email);
+            default -> System.out.println("❌ Unknown user type: " + userType);
+        }
+    }
+
+    @Override
+    public void updateExpertInfo(String email, String name, String phone) {
+        ExpertDAO dao = new ExpertDAO();
+        dao.updateExpertInfo(email, name, phone);
     }
 }
 

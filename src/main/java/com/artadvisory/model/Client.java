@@ -1,6 +1,9 @@
 package com.artadvisory.model;
 
-public class Client extends User {
+import com.artadvisory.dao.ClientDAO;
+import com.artadvisory.interfaces.ClientActions;
+
+public class Client extends User implements ClientActions {
     private int clientID;
     private String affiliation;
     private String intent;
@@ -77,18 +80,30 @@ public class Client extends User {
         );
     }
 
-
-    //public List<ServiceRequest> getServiceRequests() {
-    //    return serviceRequests;
-    //}
-
-    //public List<Auction> getAttendedAuctions() {
-    //    return attendedAuctions;
-    //}
-
     // UML methods
-    public void signUp(String emailAddress, String password, String affiliation, String phoneNumber, String intent) {
-        // TODO implement sign up logic
+    @Override
+    public void signUp(String emailAddress, String phoneNumber, String name, String password, String affiliation, String intent) {
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+        this.affiliation = affiliation;
+        this.intent = intent;
+        this.accountStatus = "Pending";
+
+        ClientDAO dao = new ClientDAO();
+        dao.insertClient(this);
+    }
+
+
+    @Override
+    public void searchObjects() {
+
+    }
+
+    @Override
+    public void searchAuctions() {
+
     }
 
     public void search() {

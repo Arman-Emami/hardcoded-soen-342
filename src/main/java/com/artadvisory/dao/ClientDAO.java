@@ -24,6 +24,7 @@ public class ClientDAO {
             pstmt.setString(4, client.getPassword());
             pstmt.setString(5, client.getAffiliation());
             pstmt.setString(6, client.getIntent());
+            System.out.println("✅ Client created!");
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -139,6 +140,51 @@ public class ClientDAO {
         } catch (SQLException e) {
             System.out.println("❌ Login failed due to DB error: " + e.getMessage());
             return null;
+        }
+    }
+
+    public void updateClientInfo(String email, String name, String phone) {
+        String sql = "UPDATE Client SET name = ?, phoneNumber = ? WHERE emailAddress = ?";
+        try (Connection conn = SQLiteConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, name);
+            pstmt.setString(2, phone);
+            pstmt.setString(3, email);
+            pstmt.executeUpdate();
+            System.out.println("✅ Client info updated!");
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to update client info: " + e.getMessage());
+        }
+    }
+
+    public void updateAccountStatus(int clientID, String newStatus) {
+        String sql = "UPDATE Client SET accountStatus = ? WHERE clientID = ?";
+        try (Connection conn = SQLiteConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newStatus);
+            pstmt.setInt(2, clientID);
+            pstmt.executeUpdate();
+            System.out.println("✅ Client Account Status updated!");
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to update account status: " + e.getMessage());
+        }
+    }
+
+    public void deleteClientByEmail(String email) {
+        String sql = "DELETE FROM Client WHERE emailAddress = ?";
+        try (Connection conn = SQLiteConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.executeUpdate();
+            System.out.println("✅ Client deleted!");
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to delete client: " + e.getMessage());
         }
     }
 
