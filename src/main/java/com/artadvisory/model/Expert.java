@@ -23,8 +23,20 @@ public class Expert extends User {
         this.expertiseArea = expertiseArea;
     }
 
+    public Expert(String email, String contactInfo, String name, String password, int licenseNumber, String expertiseArea) {
+        this.emailAddress = email;
+        this.phoneNumber = contactInfo;
+        this.name = name;
+        this.password = password;
+        this.licenseNumber = licenseNumber;
+        this.expertiseArea = expertiseArea;
+    }
+
+    public Expert(int expertID, String emailAddress, String phoneNumber, String name, String password, int licenseNumber, String expertiseArea, String availability) {
+    }
+
     // Getters and Setters
-    public String getLicenseNumber() {
+    public int getLicenseNumber() {
         return licenseNumber;
     }
 

@@ -5,143 +5,114 @@ import com.artadvisory.dao.*;
 import com.artadvisory.model.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        DatabaseInitializer.createClientTable();
+        DatabaseInitializer.initializeAllTables();
+                Scanner scanner = new Scanner(System.in);
+                Object loggedUser = null;
 
-        ClientDAO clientDAO = new ClientDAO();
+                while (loggedUser == null) {
+                    System.out.println("\nWelcome to the Art Advisory System 🎨");
+                    System.out.println("[1] Login");
+                    System.out.println("[2] Sign Up (Client Only)");
+                    System.out.println("[0] Exit");
+                    System.out.print("Select an option: ");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine();
 
-        Client c = new Client("example09@mail.com", "123-456-7890", "John Doe", "pass123",
-                "Private Collector", "Interested in Islamic Art");
-        clientDAO.insertClient(c);
+                    switch (choice) {
+                        case 1 -> {
+                            System.out.println("\nLogin as:");
+                            System.out.println("[1] Client");
+                            System.out.println("[2] Expert");
+                            System.out.println("[3] Admin");
+                            System.out.print("Select user type: ");
+                            int role = scanner.nextInt();
+                            scanner.nextLine(); // consume newline
 
-        List<Client> clients = clientDAO.getAllClients();
-        for (Client client : clients) {
-            System.out.println(client);
+                            System.out.print("Email: ");
+                            String email = scanner.nextLine();
+                            System.out.print("Password: ");
+                            String password = scanner.nextLine();
+
+                            switch (role) {
+                                case 1 -> {
+                                    Client client = new ClientDAO().authenticateClient(email, password);
+                                    if (client != null) {
+                                        loggedUser = client;
+                                        System.out.println("✅ Client login successful. Welcome, " + client.getName());
+                                    } else {
+                                        System.out.println("❌ Invalid credentials.");
+                                    }
+                                }
+                                case 2 -> {
+                                    Expert expert = new ExpertDAO().authenticateExpert(email, password);
+                                    if (expert != null) {
+                                        loggedUser = expert;
+                                        System.out.println("✅ Expert login successful. Welcome, " + expert.getName());
+                                    } else {
+                                        System.out.println("❌ Invalid credentials.");
+                                    }
+                                }
+                                case 3 -> {
+                                    Admin admin = new AdminDAO().authenticateAdmin(email, password);
+                                    if (admin != null) {
+                                        loggedUser = admin;
+                                        System.out.println("✅ Admin login successful. Welcome, " + admin.getName());
+                                    } else {
+                                        System.out.println("❌ Invalid credentials.");
+                                    }
+                                }
+                                default -> System.out.println("❌ Invalid user type.");
+                            }
+                        }
+
+                        case 2 -> {
+                            System.out.println("\n📝 Client Sign Up");
+                            System.out.print("Email: ");
+                            String email = scanner.nextLine();
+                            System.out.print("Phone Number: ");
+                            String phone = scanner.nextLine();
+                            System.out.print("Name: ");
+                            String name = scanner.nextLine();
+                            System.out.print("Password: ");
+                            String password = scanner.nextLine();
+                            System.out.print("Affiliation: ");
+                            String affiliation = scanner.nextLine();
+                            System.out.print("Intent (e.g., Buyer, Seller): ");
+                            String intent = scanner.nextLine();
+
+                            Client newClient = new Client();
+                            newClient.signUp(email, phone, name, password, affiliation, intent);
+                            System.out.println("✅ Client signed up! Please log in.");
+                        }
+
+                        case 0 -> {
+                            System.out.println("👋 Exiting program. Goodbye!");
+                            System.exit(0);
+                        }
+
+                        default -> System.out.println("❌ Invalid choice.");
+                    }
+                }
+
+        if (loggedUser instanceof Client client)
+            UserDashboard.show(client);
+         else if (loggedUser instanceof Admin admin)
+            AdminDashboard.show(admin);
+         else if (loggedUser instanceof Expert expert)
+            ExpertDashboard.show(expert);
+        else
+            System.exit(0);
+            }
         }
 
-//        Scanner keyIn = new Scanner(System.in);
-//
-//        Admin admin = new Admin("admin@gmail.com", "admin");
-//        Expert expert = new Expert("expert@gmail.com", "expert");
-//        Clients client = new Clients("client@gmail.com", "client");
-//
-//        boolean continuation = true;
-//
-//        while (continuation){
-//            System.out.println("Welcome to the system! Please select your role to continue.");
-//            System.out.println("1. Admin");
-//            System.out.println("2. Expert");
-//            System.out.println("3. Client");
-//            int selectedRole = keyIn.nextInt();
-//
-//            System.out.println("Enter your username: ");
-//            String enteredUsername = keyIn.next();
-//
-//            System.out.println("Enter your password: ");
-//            String enteredPassword = keyIn.next();
-//
-//            switch(selectedRole) {
-//                case(1): {
-//                    if (!(admin.checkUsername(enteredUsername) &&
-//                            admin.checkPassword(enteredPassword))) {
-//                        System.out.println("Invalid username or password entered," +
-//                                "exiting system.");
-//                        System.exit(0);
-//                    }
-//                    //rest of the code
-//                    System.out.println("Select an option:");
-//                    System.out.println("1. Add object of interest.");
-//                    int adminSelectedAction = keyIn.nextInt();
-//                    if (adminSelectedAction == 1){
-//                        System.out.println("Enter the title of the object:");
-//                        String objectTitle = keyIn.next();
-//
-//                        System.out.println("Enter the description of the object:");
-//                        String objectDescription = keyIn.next();
-//
-//                        System.out.println("Is the object owned by the institution?");
-//                        boolean isOwned = keyIn.nextBoolean();
-//
-//                        System.out.println("Can the object be auctioned?");
-//                        boolean isAuctioned = keyIn.nextBoolean();
-//
-//                        System.out.println("Enter the type of the object:");
-//                        String objectType = keyIn.next();
-//
-//                        ObjectOfInterest o1 = new ObjectOfInterest(objectTitle, objectDescription, isOwned, isAuctioned, objectType);
-//                        System.out.println("Object successfully added.");
-//                    }
-//                    System.out.println("Wish to continue?");
-//                    String doContinue = keyIn.next();
-//                    if (doContinue.equals("yes")){
-//                        System.out.println("Continuing");
-//                    }
-//                    else {
-//                        continuation = false;
-//                    }
-//                    break;
-//                }
-//                case(2): {
-//                    if (!(expert.checkUsername(enteredUsername) &&
-//                            expert.checkPassword(enteredPassword))) {
-//                        System.out.println("Invalid username or password entered," +
-//                                "exiting system.");
-//                        System.exit(0);
-//                    }
-//                    //rest of the code
-//                    System.out.println("Select an option:");
-//                    System.out.println("1.View objects of interests.");
-//                    int expertSelectedOption = keyIn.nextInt();
-//                    if (expertSelectedOption == 1){
-//                        System.out.println("List of ObjectOfInterest instances:");
-//                        for (ObjectOfInterest obj : ObjectOfInterest.getListOfObjects()) {
-//                            obj.displayInfo();
-//                            System.out.println("-------------------");
-//                        }
-//                    }
-//                    System.out.println("Wish to continue?");
-//                    String doContinue = keyIn.next();
-//                    if (doContinue.equals("yes")){
-//                        System.out.println("Continuing");
-//                    }
-//                    else {
-//                        continuation = false;
-//                    }
-//                    break;
-//                }
-//                case(3): {
-//                    if (!(client.checkUsername(enteredUsername) &&
-//                            client.checkPassword(enteredPassword))) {
-//                        System.out.println("Invalid username or password entered," +
-//                                "exiting system.");
-//                        System.exit(0);
-//                    }
-//                    //rest of the code
-//                    System.out.println("Select an option:");
-//                    System.out.println("1.View objects of interests.");
-//                    int expertSelectedOption = keyIn.nextInt();
-//                    if (expertSelectedOption == 1){
-//                        System.out.println("List of ObjectOfInterest instances:");
-//                        for (ObjectOfInterest obj : ObjectOfInterest.getListOfObjects()) {
-//                            obj.displayInfo();
-//                            System.out.println("-------------------");
-//                        }
-//                    }
-//                    System.out.println("Wish to continue?");
-//                    String doContinue = keyIn.next();
-//                    if (doContinue.equals("yes")){
-//                        System.out.println("Continuing");
-//                    }
-//                    else {
-//                        continuation = false;
-//                    }
-//                    break;
-//                }
-//            }
-//        }
-
-    }
-}
+//public static void main(String[] args) {
+//        Admin admin1 = new Admin("admin@gmail.com","4384384343", "John", "admin123");
+//        AdminDAO adminDAO = new AdminDAO();
+//        adminDAO.insertAdmin(admin1);
+//    }
+//}

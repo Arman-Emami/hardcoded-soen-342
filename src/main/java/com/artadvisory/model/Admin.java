@@ -14,15 +14,18 @@ public class Admin extends User implements AdminActions {
     public Admin(String emailAddress, String password) {
         super(emailAddress, password);
     }
+    public Admin(String emailAddress, String phoneNumber, String name, String password) {
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.password = password;
+    }
     public Admin(int adminID, String emailAddress, String phoneNumber, String name, String password) {
         this.adminID = adminID;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.password = password;
-    }
-
-    public Admin(int adminID, String emailAddress, String phoneNumber, String name, String password, Object o) {
     }
 
     // Getters and Setters
@@ -69,7 +72,7 @@ public class Admin extends User implements AdminActions {
     }
 
     @Override
-    public void addExpertAccount(String email, String password, String name, String licenseNumber, String contactInfo, String expertiseArea) {
+    public void addExpertAccount(String email, String password, String name, int licenseNumber, String contactInfo, String expertiseArea) {
         Expert expert = new Expert(email, contactInfo, name, password, licenseNumber, expertiseArea);
         ExpertDAO dao = new ExpertDAO();
         dao.insertExpert(expert);
@@ -86,7 +89,6 @@ public class Admin extends User implements AdminActions {
         switch (userType.toLowerCase()) {
             case "client" -> new ClientDAO().deleteClientByEmail(email);
             case "expert" -> new ExpertDAO().deleteExpertByEmail(email);
-            case "admin" -> new AdminDAO().deleteAdminByEmail(email);
             default -> System.out.println("❌ Unknown user type: " + userType);
         }
     }

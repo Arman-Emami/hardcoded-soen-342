@@ -27,6 +27,9 @@ public class ObjectOfInterest {
     public ObjectOfInterest(int objectOfInterestID, int auctionID, String title, String detailDescription, boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType) {
     }
 
+    public ObjectOfInterest(int auctionID, String title, String description, boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType) {
+    }
+
     // Getters and Setters
     public String getTitle() {
         return title;

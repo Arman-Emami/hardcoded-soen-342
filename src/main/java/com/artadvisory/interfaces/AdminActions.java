@@ -14,7 +14,7 @@ public interface AdminActions {
     void updateObjectOfInterest(int objectID, String title, String description,
                                 boolean isOwnedByInstitution, boolean canBeAuctioned, String objectType);
 
-    void addExpertAccount(String email, String password, String name, String licenseNumber, String contactInfo, String expertiseArea);
+    void addExpertAccount(String email, String password, String name, int licenseNumber, String contactInfo, String expertiseArea);
 
     void addExpertAvailability(int expertID, String weekDay, String startTime, String endTime, String availabilityType);
 

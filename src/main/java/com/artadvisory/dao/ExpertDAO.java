@@ -21,7 +21,7 @@ public class ExpertDAO {
             pstmt.setString(2, expert.getPhoneNumber());
             pstmt.setString(3, expert.getName());
             pstmt.setString(4, expert.getPassword());
-            pstmt.setString(5, expert.getLicenseNumber());
+            pstmt.setInt(5, expert.getLicenseNumber());
             pstmt.setString(6, expert.getExpertiseArea());
             pstmt.executeUpdate();
             System.out.println("✅ Expert added!");
@@ -30,6 +30,39 @@ public class ExpertDAO {
             System.out.println("❌ Failed to insert expert: " + e.getMessage());
         }
     }
+
+    public Expert authenticateExpert(String email, String password) {
+        String sql = "SELECT * FROM Expert WHERE emailAddress = ? AND password = ?";
+
+        try (Connection conn = SQLiteConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Expert(
+                            rs.getInt("expertID"),
+                            rs.getString("emailAddress"),
+                            rs.getString("phoneNumber"),
+                            rs.getString("name"),
+                            rs.getString("password"),
+                            rs.getInt("licenseNumber"),
+                            rs.getString("expertiseArea"),
+                            rs.getString("availability")
+                    );
+                } else {
+                    return null; // login failed
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to authenticate expert: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     public void updateExpertInfo(String email, String name, String phone) {
         String sql = "UPDATE Expert SET name = ?, phoneNumber = ? WHERE emailAddress = ?";

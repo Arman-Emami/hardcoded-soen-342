@@ -45,7 +45,7 @@ public class DatabaseInitializer {
             emailAddress TEXT NOT NULL UNIQUE,
             phoneNumber TEXT,
             name TEXT NOT NULL,
-            password TEXT NOT NULL,
+            password TEXT NOT NULL
         );
     """;
         executeTableCreation(sql, "Admin");
