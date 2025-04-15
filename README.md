@@ -7,3 +7,6 @@
 
 - **[Parsa Darbani]**  
   Student ID: [40265199]
+
+Link to our demo video:
+https://youtu.be/vcYsGrIGZIM
