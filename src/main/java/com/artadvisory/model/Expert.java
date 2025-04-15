@@ -1,9 +1,14 @@
 package com.artadvisory.model;
 
+import com.artadvisory.dao.AvailabilityDAO;
+import com.artadvisory.dao.ExpertDAO;
+import com.artadvisory.interfaces.ExpertActions;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Expert extends User {
+public class Expert extends User implements ExpertActions {
+    private int expertID;
     private int licenseNumber;
     private String expertiseArea;
     // Each Expert can have multiple Availability entries
@@ -64,31 +69,37 @@ public class Expert extends User {
         this.institution = institution;
     }
 
-    // UML methods
-    public void login() {
-        // TODO implement
+
+
+    @Override
+    public void addAvailability(String weekDay, String startTime, String endTime) {
+        new AvailabilityDAO().insertAvailability(expertID, weekDay, startTime, endTime, "Regular");
     }
 
-    public void addAvailability(String weekDayAvailable, String startTime, String endTime) {
-        Availability newAvail = new Availability(weekDayAvailable, startTime, endTime);
-        availabilityList.add(newAvail);
+    @Override
+    public void removeAvailability(int availabilityID) {
+        new AvailabilityDAO().deleteAvailability(availabilityID);
     }
 
-    public void addExpertise(String newArea) {
-        // Possibly just set expertiseArea, or store multiple expertise areas
-        this.expertiseArea = newArea;
+    @Override
+    public void modifyAvailability(int availabilityID, String newWeekDay, String newStartTime, String newEndTime) {
+        new AvailabilityDAO().updateAvailability(availabilityID, newWeekDay, newStartTime, newEndTime);
     }
 
-    public void getAuction() {
-        // TODO implement retrieving auctions the expert is involved in
+    @Override
+    public void addExpertise(String newExpertise) {
+        this.expertiseArea = newExpertise;
+        new ExpertDAO().updateExpertise(this.expertID, newExpertise);
     }
 
+    @Override
     public void offerAvailability() {
-        // TODO implement
+        new AvailabilityDAO().printExpertAvailability(expertID);
     }
 
-    public void modifyAvailability() {
-        // TODO implement
+    @Override
+    public void getAuction() {
+        System.out.println("🔍 This feature (getAuction) is not yet implemented.");
     }
 }
 

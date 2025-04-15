@@ -94,4 +94,26 @@ public class ExpertDAO {
         }
     }
 
+    public void updateExpertise(int expertID, String newExpertise) {
+        String sql = "UPDATE Expert SET expertiseArea = ? WHERE expertID = ?";
+
+        try (Connection conn = SQLiteConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newExpertise);
+            pstmt.setInt(2, expertID);
+
+            int rows = pstmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("✅ Expertise area updated successfully.");
+            } else {
+                System.out.println("⚠️ Expert not found with that ID.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("❌ Failed to update expertise: " + e.getMessage());
+        }
+    }
+
+
 }
