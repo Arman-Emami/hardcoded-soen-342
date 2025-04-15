@@ -61,9 +61,4 @@ abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    // Additional functionality can go here
-    public void login() {
-        // TODO implement login
-    }
 }

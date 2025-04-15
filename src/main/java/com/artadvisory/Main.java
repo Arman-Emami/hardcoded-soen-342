@@ -31,7 +31,7 @@ public class Main {
                             System.out.println("[3] Admin");
                             System.out.print("Select user type: ");
                             int role = scanner.nextInt();
-                            scanner.nextLine(); // consume newline
+                            scanner.nextLine();
 
                             System.out.print("Email: ");
                             String email = scanner.nextLine();

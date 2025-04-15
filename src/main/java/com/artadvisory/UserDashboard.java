@@ -8,7 +8,7 @@ public class UserDashboard {
 
     public static void show(Client client) {
         if (!client.getAccountStatus().equalsIgnoreCase("Approved")) {
-            System.out.println("⚠️ Your account is pending approval. Please wait for an admin to verify it.");
+            System.out.println("⚠️ Your account is pending approval. Please wait for an admin to verify your account.");
             return;
         }
 
@@ -16,26 +16,26 @@ public class UserDashboard {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n👤 Client Dashboard");
+            System.out.println("\n🎟️ Client Dashboard - Welcome " + client.getName());
             System.out.println("[1] Search Auctions");
             System.out.println("[2] Search Objects of Interest");
             System.out.println("[3] Request a Service");
-            System.out.println("[4] Buy an Object");
+            System.out.println("[4] Buy an Object of Interest");
             System.out.println("[0] Logout");
-            System.out.print("Choice: ");
+            System.out.print("Choose an option: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // consume newline
 
             switch (choice) {
-                case 1 -> System.out.println("🔍 Searching auctions...");
-                case 2 -> System.out.println("🔍 Searching objects of interest...");
-                case 3 -> System.out.println("📄 Requesting service...");
-                case 4 -> System.out.println("💳 Buying object...");
+                case 1 -> client.searchAuctions();
+                case 2 -> client.searchObjects();
+                case 3 -> client.requestService();
+                case 4 -> client.buyObjectOfInterest();
                 case 0 -> {
                     running = false;
                     System.out.println("👋 Logging out...");
                 }
-                default -> System.out.println("❌ Invalid option.");
+                default -> System.out.println("❌ Invalid choice.");
             }
         }
     }

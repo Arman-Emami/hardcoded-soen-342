@@ -6,8 +6,11 @@ import com.artadvisory.model.ObjectOfInterest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ObjectOfInterestDAO {
+
+    Scanner scanner = new Scanner(System.in);
 
     public void insertObject(ObjectOfInterest obj) {
         String sql = """
@@ -159,4 +162,15 @@ public class ObjectOfInterestDAO {
             System.out.println("❌ Failed to update object: " + e.getMessage());
         }
     }
+
+    public void simulatePurchase(int clientID) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Object ID to buy: ");
+        int objectID = scanner.nextInt();
+
+        System.out.println("💳 Simulating purchase...");
+        System.out.printf("✅ Client #%d bought object #%d (simulation).\n", clientID, objectID);
+    }
+
+
 }

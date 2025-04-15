@@ -98,5 +98,21 @@ public class Admin extends User implements AdminActions {
         ExpertDAO dao = new ExpertDAO();
         dao.updateExpertInfo(email, name, phone);
     }
+
+//    @Override
+//    public void addAuction(int auctionHouseID, String name, String specialty,
+//                           String startWeekDay, String endWeekDay,
+//                           String startDate, String endDate,
+//                           String startTime, String endTime,
+//                           String auctionType, String timeZone, boolean isOnline) {
+//
+//        Auction auction = new Auction(auctionHouseID, name, specialty,
+//                startWeekDay, endWeekDay, startDate, endDate,
+//                startTime, endTime, auctionType, timeZone, isOnline);
+//
+//        AuctionDAO dao = new AuctionDAO();
+//        dao.insertAuction(auction);
+//    }
+
 }
 

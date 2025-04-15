@@ -1,7 +1,12 @@
 package com.artadvisory.model;
 
+import com.artadvisory.dao.AuctionDAO;
 import com.artadvisory.dao.ClientDAO;
+import com.artadvisory.dao.ObjectOfInterestDAO;
+import com.artadvisory.dao.ServiceRequestDAO;
 import com.artadvisory.interfaces.ClientActions;
+
+import java.util.List;
 
 public class Client extends User implements ClientActions {
     private int clientID;
@@ -98,23 +103,37 @@ public class Client extends User implements ClientActions {
 
     @Override
     public void searchObjects() {
+        List<ObjectOfInterest> objects = new ObjectOfInterestDAO().getAllObjects();
 
+        if (objects.isEmpty()) {
+            System.out.println("⚠️ No objects found.");
+            return;
+        }
+
+        System.out.println("\n🖼️ Available Objects of Interest:");
+        for (ObjectOfInterest obj : objects) {
+            System.out.printf("Title: %s | Type: %s | OwnedByInstitution: %b | Auctionable: %b\n  Description: %s\n\n",
+                    obj.getTitle(),
+                    obj.getObjectType(),
+                    obj.isOwnedByInstitution(),
+                    obj.canBeAuctioned(),
+                    obj.getDetailDescription());
+        }
     }
+
 
     @Override
     public void searchAuctions() {
-
+        new AuctionDAO().displayAllAuctions();
     }
 
-    public void search() {
-        // TODO implement search
-    }
-
+    @Override
     public void requestService() {
-        // TODO implement
+        new ServiceRequestDAO().createRequest(this.clientID);
     }
 
+    @Override
     public void buyObjectOfInterest() {
-        // TODO implement
+        new ObjectOfInterestDAO().simulatePurchase(this.clientID);
     }
 }

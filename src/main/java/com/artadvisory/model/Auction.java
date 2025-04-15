@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Auction {
+    private int auctionID;
     private String name;
     private String auctionSpeciality;
     private String weekday;
@@ -13,6 +14,28 @@ public class Auction {
     private String endTime;   // or use a more precise type
     private String auctionType;
     private String timezone;
+
+    public Auction(int auctionID, String name, String auctionSpeciality, String weekday, String date, String startTime, String endTime, String auctionType, String timezone, boolean isOnline) {
+        this.auctionID = auctionID;
+        this.name = name;
+        this.auctionSpeciality = auctionSpeciality;
+        this.weekday = weekday;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.auctionType = auctionType;
+        this.timezone = timezone;
+        this.isOnline = isOnline;
+    }
+
+    public int getAuctionID() {
+        return auctionID;
+    }
+
+    public void setAuctionID(int auctionID) {
+        this.auctionID = auctionID;
+    }
+
     private boolean isOnline;
 
     // An Auction can contain many ObjectsOfInterest

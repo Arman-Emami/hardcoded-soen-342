@@ -91,4 +91,5 @@ public class ObjectOfInterest {
     public boolean canBeAuctioned() {
         return this.canBeAuctioned;
     }
+
 }
